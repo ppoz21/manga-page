@@ -1,9 +1,9 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <router-link
         class="navbar-brand"
-        to="/home"
+        to="/"
       >
         App
       </router-link>
@@ -26,21 +26,33 @@
           <router-link
             class="nav-item"
             tag="li"
-            to="/home"
+            to="/"
+            active-class="active"
+            exact
+          >
+            <a class="nav-link">Strona główna</a>
+          </router-link>
+          <router-link
+            class="nav-item"
+            tag="li"
+            to="/o-nas"
             active-class="active"
           >
-            <a class="nav-link">Home</a>
+            <a class="nav-link">O nas</a>
           </router-link>
         </ul>
       </div>
     </nav>
-
     <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  metaInfo: {
+    title: 'Tytuł Domyślny',
+    titleTemplate: '%s | Nazwa aplikacji'
+  }
 };
 </script>

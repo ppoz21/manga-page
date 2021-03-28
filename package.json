@@ -10,6 +10,8 @@
         "eslint-loader": "^4.0.2",
         "eslint-plugin-vue": "^7.8.0",
         "regenerator-runtime": "^0.13.2",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.0",
         "stimulus": "^2.0.0",
         "vue-loader": "^15.9.6",
         "vue-template-compiler": "^2.6.12",
@@ -26,7 +28,11 @@
     },
     "dependencies": {
         "axios": "^0.21.1",
+        "bootstrap": "^4.6.0",
+        "jquery": "^3.6.0",
+        "popper.js": "^1.16.1",
         "vue": "^2.6.12",
+        "vue-meta": "^2.4.0",
         "vue-router": "^3.5.1",
         "vuex": "^3.6.2"
     }

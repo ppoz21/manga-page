@@ -1,20 +1,20 @@
 <template>
   <div>
     <div class="row col">
-      <h1>Homepage</h1>
+      <h1>About us</h1>
     </div>
 
     <div class="row col">
-      <p>This is the homepage of our Vue.js application.</p>
+      <p>This is the about us page of our Vue.js application.</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Home",
+  name: "About",
   metaInfo: {
-    title: 'Strona główna',
+    title: 'O nas',
   }
 };
 </script>
