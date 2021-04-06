@@ -1,0 +1,452 @@
+/*
+    Theme Name : ElitesCorp
+    Auther Name : ZFCon
+    SCSS convert and edit : Paweł Palacz
+
+    Swatch 1
+    #070707
+    Swatch 2
+    #faf9f9
+    Swatch 3
+    #c3b6ab
+    Swatch 4
+    #ab201c
+    Swatch 5
+    #a92d1c
+    Swatch 6
+    #4e544e
+    Swatch 7
+    #d9a83d
+    Swatch 8
+    #568c90
+*/
+
+/* start navbar */
+
+/* start base */
+
+html
+{
+  font-size: 16px;
+}
+
+body {
+  background-color: #0d1117;
+  color: #faf9f9;
+}
+
+a {
+  color: #530c0a;
+  text-decoration: none;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    color: #ba080b;
+    text-decoration: none;
+  }
+}
+
+table tbody tr td {
+  color: #ab201c;
+}
+
+.btn-red {
+  padding: 5px 10px;
+  background-color: #ba080b;
+  border-radius: 0;
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    box-shadow: 0 0.225rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+    color: #faf9f9;
+  }
+}
+
+/* end base */
+
+.navbar {
+  background-color: #ab201c;
+  padding: 0 1rem;
+
+  .navbar-nav .nav-item .nav-link, .navbar-brand {
+    color: #faf9f9;
+    font-size: 1.125rem;
+    font-weight: bolder;
+    transition: all .2s ease-in-out;
+  }
+
+  .navbar-nav .nav-item {
+    padding: 0 10px;
+
+    &.active .nav-link, .nav-link:hover {
+      border-bottom: 3px solid #faf9f9;
+    }
+  }
+
+  .search {
+    .input-group {
+      width: 100%;
+    }
+
+    input[type='text'] {
+      border-radius: 100px 0 0 100px;
+    }
+
+    button {
+      border-radius: 0 100px 100px 0;
+      background-color: #fff;
+      border: 1px solid #d8d5d5;
+      border-left: none;
+      color: #070707;
+
+      &:hover {
+        color: #ab201c;
+      }
+    }
+  }
+
+  .profile {
+    color: #faf9f9;
+    transition: all .2s ease-in-out;
+
+    .btn {
+      color: #faf9f9;
+      transition: all .2s ease-in-out;
+
+      &:hover {
+        color: #070707;
+      }
+    }
+
+    .saved {
+      span, a:last-of-type {
+        color: #ab201c;
+      }
+    }
+
+    .account, .saved {
+      display: inline-block;
+    }
+  }
+}
+
+.dropdown-menu-right {
+  right: 50px;
+}
+
+/* end navbar */
+
+/* start slider */
+
+.carousel-control-next, .carousel-control-prev {
+  opacity: 1;
+}
+
+#mangaslider {
+  .carousel-control-prev div, .carousel-control-next div {
+    width: 50px;
+    height: 50px;
+    background-color: #ab201c;
+    line-height: 57px;
+    border-radius: 50%;
+  }
+  .carousel-item
+  {
+    max-height: 40vh;
+  }
+}
+
+/* end slider */
+
+/* start lastest */
+
+.lastest {
+  .calendar {
+    .list-inline {
+      margin: 0;
+    }
+
+    .list-inline-item {
+      font-size: 1.125rem;
+      cursor: pointer;
+      transition: all .2s ease-in-out;
+
+      &.active, &:hover {
+        border-bottom: 2px solid #ab201c;
+      }
+    }
+  }
+
+  .posts .card {
+    background-color: transparent;
+    transition: all .3s ease-in-out;
+    z-index: 1;
+    border: 0;
+
+    .card-body {
+      padding: 5px;
+    }
+
+    .card-text {
+      margin: 0;
+    }
+
+    .card-title {
+      margin: 0;
+
+      a {
+        color: #faf9f9;
+      }
+    }
+
+    .over {
+      position: absolute;
+      background-color: #fff;
+      bottom: 0;
+      left: 0;
+      height: 60%;
+      color: #070707;
+      display: none;
+      border-radius: 0 0 5px 5px;
+      font-size: 10px;
+
+      .head {
+        background-color: #ab201c;
+        color: #faf9f9;
+
+        h6 {
+          padding: 5px 10px;
+        }
+      }
+
+      .about-list {
+        padding-left: 10px;
+      }
+
+      .table {
+        td, th {
+          padding: 0;
+        }
+      }
+
+      .reading {
+        font-size: 10px;
+        padding: 5px 10px;
+        color: #faf9f9;
+        background-color: #ab201c;
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .lastest .posts .card {
+    &:hover {
+      z-index: 2;
+      transform: scale(1.1, 1.1);
+
+      .over {
+        display: block;
+      }
+    }
+
+    .card-img-top {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .lastest .posts .card .card-img-top {
+    height: auto;
+  }
+}
+
+/* card details */
+
+/* end lastest */
+
+/* start intro to read */
+
+.read-intro {
+  color: #070707;
+  position: relative;
+  padding: 25px 75px;
+
+  .fa-bookmark {
+    color: #ab201c;
+    position: absolute;
+    top: 30px;
+    right: 70px;
+    cursor: pointer;
+  }
+
+  .cover {
+    padding-right: 20px;
+  }
+
+  .table i {
+    color: #ffd550;
+  }
+
+  p a {
+    color: #ab201c;
+  }
+
+  .cover .shadow {
+    box-shadow: 0 0.225rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+  }
+}
+
+/* end intro to read */
+
+/* start intro lists */
+
+.intro-lists {
+  color: #070707;
+
+  .head-list {
+    color: #ab201c;
+    padding: 20px 0 0 20px;
+    font-size: 18px;
+
+    li {
+      a.active {
+        color: #070707;
+        font-weight: bold;
+        padding: 0 5px;
+      }
+
+      &:after {
+        content: ' |';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+  }
+}
+
+/* end intro lists */
+
+/* start ch */
+
+/* end ch */
+
+/* start vol */
+
+/* end vol */
+
+/* start related */
+
+#related .card {
+  transition: all .3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* end related */
+
+/* start gallery reponsive img */
+
+#gallery {
+  .imgrow {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+  }
+
+  .imgcol {
+    flex: 33.33333%;
+    max-width: 33.33333%;
+    padding: 0 4px;
+
+    img {
+      margin-top: 8px;
+      vertical-align: middle;
+      width: 100%;
+      padding: 10px;
+      border-radius: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  #gallery .imgcol {
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  #gallery .imgcol {
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+/* end gallery */
+
+/* start footer */
+
+footer {
+  background-color: #181818;
+}
+
+/* end footer */
+
+/* Responsive navbar */
+@include media-breakpoint-down(md)
+{
+  html
+  {
+    font-size: 36px;
+
+    .navbar
+    {
+
+      padding: 30px;
+
+      .navbar-nav .nav-item .nav-link, .navbar-brand
+      {
+        font-size: 2rem;
+      }
+
+      .navbar-toggler
+      {
+        font-size: 2rem;
+      }
+
+      .search
+      {
+
+        input
+        {
+          min-height: 5vh;
+          font-size: 2rem;
+        }
+
+        button
+        {
+          font-size: 1.3rem;
+        }
+
+      }
+
+    }
+
+    .lastest
+    {
+      p
+      {
+        font-size: 1rem;
+      }
+    }
+  }
+}
