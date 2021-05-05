@@ -1,4 +1,5 @@
 import ComicsApi from "../api/comisc";
+import comisc from "../api/comisc";
 
 const FETCHING_COMICS = "FETCHING_COMICS",
   FETCHING_COMICS_SUCCESS = "FETCHING_COMICS_SUCCESS",
@@ -22,7 +23,7 @@ export default {
       return state.error;
     },
     hasComisc(state) {
-      return state.comics.length > 0;
+      return state.comics !== null && state.comics.length > 0;
     },
     comics(state) {
       return state.comics
@@ -55,7 +56,21 @@ export default {
       }
       catch (e)
       {
-        commit(FETCHING_COMICS_ERROR, error);
+        commit(FETCHING_COMICS_ERROR, e);
+        return null;
+      }
+    },
+    async findLatest({ commit })
+    {
+      commit(FETCHING_COMICS);
+      try {
+        let response = await ComicsApi.findLatest();
+        commit(FETCHING_COMICS_SUCCESS, response.data);
+        return response.data;
+      }
+      catch (e)
+      {
+        commit(FETCHING_COMICS_ERROR, e);
         return null;
       }
     }

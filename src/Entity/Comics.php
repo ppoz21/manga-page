@@ -8,12 +8,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use App\Controller\api\comisc\LatestController;
 
 /**
  * @ORM\Entity(repositoryClass=ComicsRepository::class)
  *
  * @ApiResource(
- *     collectionOperations={"get"={"normalization_context"={"groups"="comics:list"}}},
+ *     collectionOperations={
+ *          "get"={"normalization_context"={"groups"="comics:list"}}
+ *     },
  *     itemOperations={"get"={"normalization_context"={"groups"="comics:item"}}},
  *     paginationEnabled=false
  * )
@@ -52,6 +55,11 @@ class Comics
      * @Groups({"comics:list", "comics:item"})
      */
     private $chapters;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $publishDate;
 
     public function __construct()
     {
@@ -125,6 +133,18 @@ class Comics
                 $chapter->setComics(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPublishDate(): ?\DateTimeInterface
+    {
+        return $this->publishDate;
+    }
+
+    public function setPublishDate(\DateTimeInterface $publishDate): self
+    {
+        $this->publishDate = $publishDate;
 
         return $this;
     }

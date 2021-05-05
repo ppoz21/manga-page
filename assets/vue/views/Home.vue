@@ -12,15 +12,22 @@
         v-if="isLoading"
         class="row col"
       >
-        <p>Loading...</p>
+        <div class="row col-12 justify-content-center my-5">
+          <div class="lds-spinner">
+            <div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div />
+          </div>
+        </div>
+        <div class="row col-12 justify-content-center">
+          <p>Trwa ładowanie...</p>
+        </div>
       </div>
 
       <div
         v-else-if="hasError"
-        class="row col"
+        class="row col-12"
       >
         <div
-          class="alert alert-danger"
+          class="alert alert-danger col-12 text-center my-5"
           role="alert"
         >
           {{ error }}
@@ -31,7 +38,7 @@
         v-else-if="!hasComisc"
         class="row col"
       >
-        No comics!
+        Nie znaleziono ostatnio dodanych tytułów
       </div>
       <div
         v-for="comic in comics"
@@ -39,7 +46,11 @@
         :key="comic.id"
         class="col-lg-2 col-md-6 col-sm-6 col-6"
       >
-        <comics :name="comic.name" />
+        <comics
+          :name="comic.name"
+          :cover="comic.coverPath"
+          :publish="comic.publishDate"
+        />
       </div>
     </div>
   </div>
@@ -72,7 +83,6 @@ export default {
       return this.$store.getters["comisc/error"];
     },
     hasComisc() {
-      console.log(this.$store.getters["comisc/hasComisc"])
       return this.$store.getters["comisc/hasComisc"];
     },
     comics() {
@@ -80,7 +90,7 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("comisc/findAll");
+    this.$store.dispatch("comisc/findLatest");
   }
 };
 </script>

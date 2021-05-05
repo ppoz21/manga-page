@@ -19,6 +19,16 @@ class ComicsRepository extends ServiceEntityRepository
         parent::__construct($registry, Comics::class);
     }
 
+    public function findByPublishDate(int $limit)
+    {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.publishDate', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Comics[] Returns an array of Comics objects
     //  */
