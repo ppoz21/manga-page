@@ -1,5 +1,4 @@
 import ComicsApi from "../api/comisc";
-import comisc from "../api/comisc";
 
 const FETCHING_COMICS = "FETCHING_COMICS",
   FETCHING_COMICS_SUCCESS = "FETCHING_COMICS_SUCCESS",

@@ -24,11 +24,6 @@ class LatestController extends AbstractController
         $this->serializer = $serializer;
     }
 
-    public function __invoke()
-    {
-        $this->getNewest();
-    }
-
     #[Route("/api/comics/latest")]
     public function getNewest()
     {
