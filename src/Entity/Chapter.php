@@ -2,11 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\ChapterRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass=ChapterRepository::class)
+ *
+ * @ApiResource(
+ *     collectionOperations={
+ *          "get"={"normalization_context"={"groups"="chapter:list"}}
+ *     },
+ *     itemOperations={"get"={"normalization_context"={"groups"="chapter:item"}}},
+ *     paginationEnabled=false
+ * )
  */
 class Chapter
 {
@@ -14,16 +24,22 @@ class Chapter
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @Groups({"chapter:list", "chapter:item"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Groups({"chapter:list", "chapter:item"})
      */
     private $number;
 
     /**
      * @ORM\Column(type="datetime")
+     *
+     * @Groups({"chapter:list", "chapter:item"})
      */
     private $addDate;
 

@@ -14,7 +14,7 @@ export default new VueRouter({
     { path: "/o-nas", component: About },
     { path: "/lista-rozdzialow", component: List },
     { path: "/gatunki", component: Genres },
-    { path: "/komiks/:slug-k:id", component: ComicDetails, name: 'komiks' },
+    { path: "/komiks/:slug/k:id", component: ComicDetails, name: 'komiks' },
     { path: "/", component: Home },
     { path: "*", redirect: "/" }
   ]

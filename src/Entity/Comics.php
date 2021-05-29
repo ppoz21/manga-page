@@ -8,7 +8,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
-use App\Controller\api\comisc\LatestController;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 /**
@@ -53,17 +52,19 @@ class Comics
 
     /**
      * @ORM\OneToMany(targetEntity=Chapter::class, mappedBy="comics", orphanRemoval=true)
-     * @Groups({"comics:list", "comics:item"})
+     * @Groups({"comics:item"})
      */
     private $chapters;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Groups({"comics:list", "comics:item"})
      */
     private $publishDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"comics:list", "comics:item"})
      */
     private $slug;
 

@@ -7,12 +7,11 @@ namespace App\Controller\api\comisc;
 use App\Repository\ComicsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
 
-class LatestController extends AbstractController
+class ComicApiController extends AbstractController
 {
 
     private ComicsRepository $comicsRepository;
@@ -25,7 +24,7 @@ class LatestController extends AbstractController
     }
 
     #[Route("/api/comics/latest")]
-    public function getNewest()
+    public function getNewest(): JsonResponse
     {
         $comics = $this->comicsRepository->findByPublishDate(10);
 

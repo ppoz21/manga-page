@@ -1,303 +1,290 @@
 <template>
   <div>
-    <!-- start reading intro -->
-    <div class="container my-5">
-      <div class="read-intro bg-light">
-        <i class="far fa-bookmark fa-3x" />
-        <div class="row">
-          <div class="cover col-*">
-            <img
-              class="shadow"
-              src="img/cover1.jpg"
-              alt=""
+    <div v-if="isLoading">
+      <div class="container my-5">
+        <div class="read-intro bg-light">
+          <div class="row col-12 justify-content-center my-5">
+            <div class="lds-spinner">
+              <div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div />
+            </div>
+          </div>
+          <div class="row col-12 justify-content-center">
+            <p>Trwa ładowanie...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="hasError">
+      <div class="container my-5">
+        <div class="read-intro bg-light">
+          <div
+            class="alert alert-danger col-12 text-center my-5"
+            role="alert"
+          >
+            Nie znaleziono
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="hasComic">
+      <!-- start reading intro -->
+      <div class="container my-5">
+        <div class="read-intro bg-light">
+          <div class="row">
+            <div class="cover col-*">
+              <img
+                class="shadow"
+                :src="url + '/' + comic.coverPath"
+                :alt="comic.name"
+              >
+            </div>
+            <div class="info col">
+              <h2 class="head">
+                {{ comic.name }}
+              </h2>
+              <table class="table table-borderless">
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      Kategoria:
+                    </th>
+                    <td>Sport</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Autor:
+                    </th>
+                    <td>Jacob ZFCon</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Ostatnia zmiana:
+                    </th>
+                    <td>{{ new Date(comic.publishDate).toLocaleDateString('pl-PL') }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      Ocena:
+                    </th>
+                    <td>
+                      <i class="fa fa-star fa-2x" /><i class="fa fa-star fa-2x" /><i
+                        class="fa fa-star fa-2x"
+                      /><i class="fa fa-star fa-2x" /><i
+                        class="fa fa-star-half-alt fa-2x"
+                      />
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div>
+                <p v-if="!readMoreActive">
+                  {{ comic.description.slice(0, 200) }}...
+                  <a
+                    href="#"
+                    @click.prevent="toggleReadMore"
+                  >Czytaj więcej</a>
+                </p>
+                <p v-else>
+                  {{ comic.description }}
+                  <a
+                    href="#"
+                    @click.prevent="toggleReadMore"
+                  >Czytaj mniej</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end reading intro -->
+
+      <!-- start intro lists -->
+      <div class="container my-5 bg-white">
+        <div class="intro-lists">
+          <div class="head-list row bg-light">
+            <ul class="list-unstyled list-inline">
+              <li class="list-inline-item">
+                <a
+                  :class="{ active: isActive('chapters') }"
+                  href="#chapters"
+                  @click.prevent="setActive('chapters')"
+                >Rozdziały</a>
+              </li>
+              <li class="list-inline-item">
+                <a
+                  :class="{ active: isActive('comments') }"
+                  href="#comments"
+                  @click.prevent="setActive('comments')"
+                >Opinie</a>
+              </li>
+            </ul>
+          </div>
+          <div class="tab-content">
+            <!-- start ch -->
+            <div
+              id="chapters"
+              class="tab-pane fade"
+              :class="{ 'in active show' : isActive('chapters') }"
             >
-          </div>
-          <div class="info col">
-            <h2 class="head">
-              One piece
-            </h2>
-            <table class="table table-borderless">
-              <tbody>
-                <tr>
-                  <th scope="row">
-                    Genre:
-                  </th>
-                  <td>Sport</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    Artist:
-                  </th>
-                  <td>Jacob ZFCon</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    Update:
-                  </th>
-                  <td>VOL. 125</td>
-                </tr>
-                <tr>
-                  <th scope="row">
-                    Rating:
-                  </th>
-                  <td>
-                    <i class="fa fa-star fa-2x" /><i class="fa fa-star fa-2x" /><i
-                      class="fa fa-star fa-2x"
-                    /><i class="fa fa-star fa-2x" /><i
-                      class="fa fa-star-half-alt fa-2x"
-                    /> <span
-                      class="font-weight-bold ml-3"
-                    >(10/9)</span>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <p>
-              Extended kindness trifling remember he confined outlived if.
-              Assistance sentiments yet unpleasing say. Open they an busy they my such high.
-              An active dinner wishes at unable hardly no talked on.
-              Immediate him her resolving his favourite. Wished denote abroad at branch at. <a href="#">Read
-                More...</a>
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <a
-            class="btn btn-red my-3 mx-1 px-5"
-            href="#"
-          >Start reading VOL. 1</a>
-        </div>
-      </div>
-    </div>
-    <!-- end reading intro -->
-
-    <!-- start intro lists -->
-    <div class="container my-5 bg-white">
-      <div class="intro-lists">
-        <div class="head-list row bg-light">
-          <ul class="list-unstyled list-inline">
-            <li class="list-inline-item">
-              <a
-                data-toggle="tab"
-                class="active"
-                href="#ch"
-              >Ch.</a>
-            </li>
-            <li class="list-inline-item">
-              <a
-                data-toggle="tab"
-                href="#vol"
-              >VOL.</a>
-            </li>
-            <li class="list-inline-item">
-              <a
-                data-toggle="tab"
-                href="#related"
-              >Related</a>
-            </li>
-            <li class="list-inline-item">
-              <a
-                data-toggle="tab"
-                href="#gallery"
-              >Gallery</a>
-            </li>
-          </ul>
-        </div>
-        <div class="tab-content">
-          <!-- start ch -->
-          <div
-            id="ch"
-            class="tab-pane fade in active show"
-          >
-            <div class="row">
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th><a href="details.html">CH. 1, Luffy in the island with two nigga</a></th>
-                    <td class="text-muted text-uppercase float-right">
-                      8 hours ago
-                    </td>
-                  </tr>
-                  <tr>
-                    <th><a href="details.html">CH. 2, Luffy in the garden with two nigga</a></th>
-                    <td class="text-muted text-uppercase float-right">
-                      8 hours ago
-                    </td>
-                  </tr>
-                  <tr>
-                    <th><a href="details.html">Ch. 3, Luffy in the school with two nigga</a></th>
-                    <td class="text-muted text-uppercase float-right">
-                      8 hours ago
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- end ch -->
-
-          <!-- start vol -->
-          <div
-            id="vol"
-            class="tab-pane fade"
-          >
-            <div class="row">
-              <table class="table table-striped">
-                <tbody>
-                  <tr>
-                    <th><a href="details.html">VOL. 2, Luffy in the island</a></th>
-                    <td class="text-muted text-uppercase float-right">
-                      8 hours ago
-                    </td>
-                  </tr>
-                  <tr>
-                    <th><a href="details.html">VOL. 2, Luffy in the garden</a></th>
-                    <td class="text-muted text-uppercase float-right">
-                      8 hours ago
-                    </td>
-                  </tr>
-                  <tr>
-                    <th><a href="details.html">VOL. 3, Luffy in the school</a></th>
-                    <td class="text-muted text-uppercase float-right">
-                      8 hours ago
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <!-- end vol -->
-
-          <!-- start related -->
-          <div
-            id="related"
-            class="tab-pane fade"
-          >
-            <div class="row">
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="details.html">
-                  <div class="card mb-3">
-                    <img
-                      src="img/cover2.jpg"
-                      class="card-img-top"
-                      alt=""
-                    >
-                    <div class="card-body">
-                      <h5 class="card-title">One piece</h5>
+              <div class="row">
+                <div v-if="isLoadingChapters">
+                  <div class="row col-12 justify-content-center my-5">
+                    <div class="lds-spinner">
+                      <div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div /><div />
                     </div>
                   </div>
-                </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="details.html">
-                  <div class="card mb-3">
-                    <img
-                      src="img/cover2.jpg"
-                      class="card-img-top"
-                      alt=""
-                    >
-                    <div class="card-body">
-                      <h5 class="card-title">One piece</h5>
-                    </div>
+                  <div class="row col-12 justify-content-center">
+                    <p>Trwa ładowanie...</p>
                   </div>
-                </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="details.html">
-                  <div class="card mb-3">
-                    <img
-                      src="img/cover2.jpg"
-                      class="card-img-top"
-                      alt=""
-                    >
-                    <div class="card-body">
-                      <h5 class="card-title">One piece</h5>
-                    </div>
+                </div>
+                <div v-else-if="hasErrorChapters">
+                  <div
+                    class="alert alert-danger col-12 text-center my-5"
+                    role="alert"
+                  >
+                    Nie znaleziono rozdziałów
                   </div>
-                </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-sm-6">
-                <a href="details.html">
-                  <div class="card mb-3">
-                    <img
-                      src="img/cover2.jpg"
-                      class="card-img-top"
-                      alt=""
-                    >
-                    <div class="card-body">
-                      <h5 class="card-title">One piece</h5>
-                    </div>
-                  </div>
-                </a>
+                </div>
+                <table
+                  v-else-if="hasChapters"
+                  class="table table-striped"
+                >
+                  <tbody v-if="chapters.length === 0">
+                    <tr>
+                      <th class="text-center">
+                        Nie znaleziono rozdziałów
+                      </th>
+                    </tr>
+                  </tbody>
+                  <tbody
+                    v-for="chapter in chapters"
+                    v-else
+                    :key="chapter.id"
+                  >
+                    <tr>
+                      <th><a href="#">{{ chapter.number }}</a></th>
+                      <td class="text-muted text-uppercase float-right">
+                        {{ new Date(chapter.addDate).toLocaleDateString('pl-PL') }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
-          </div>
-          <!-- end related -->
+            <!-- end ch -->
 
-          <!-- start gallery -->
-          <div
-            id="gallery"
-            class="tab-pane fade"
-          >
-            <div class="imgrow">
-              <div class="imgcol">
-                <img
-                  src="img/cover1.jpg"
-                  width="100%"
-                >
-                <img
-                  src="img/slider1.jpg"
-                  width="100%"
-                >
-                <img
-                  src="img/apex-section-bg-legends-caustic-xl.jpg.adapt.320w.jpg"
-                  width="100%"
-                >
-              </div>
-              <div class="imgcol">
-                <img
-                  src="img/76693209_2445782385645459_1824072803884728320_n.jpg"
-                  width="100%"
-                >
-                <img
-                  src="img/slider1.jpg"
-                  width="100%"
-                >
-                <img
-                  src="img/cover4.jpg"
-                  width="100%"
-                >
-              </div>
-              <div class="imgcol">
-                <img
-                  src="img/72561095_1152623741615641_762555470421426176.jpg"
-                  width="100%"
-                >
-                <img
-                  src="img/47126346_671615859906817_766212574944428032_n.jpg"
-                  width="100%"
-                >
-                <img
-                  src="img/cover2.jpg"
-                  width="100%"
-                >
+            <!-- start vol -->
+            <div
+              id="comments"
+              class="tab-pane fade"
+              :class="{ 'in active show' : isActive('comments') }"
+            >
+              <div class="row">
+                <table class="table table-striped">
+                  <tbody>
+                    <tr>
+                      <th><a href="#">VOL. 2, Luffy in the island</a></th>
+                      <td class="text-muted text-uppercase float-right">
+                        8 hours ago
+                      </td>
+                    </tr>
+                    <tr>
+                      <th><a href="#">VOL. 2, Luffy in the garden</a></th>
+                      <td class="text-muted text-uppercase float-right">
+                        8 hours ago
+                      </td>
+                    </tr>
+                    <tr>
+                      <th><a href="#">VOL. 3, Luffy in the school</a></th>
+                      <td class="text-muted text-uppercase float-right">
+                        8 hours ago
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+            <!-- end vol -->
           </div>
-          <!-- end gallery-->
         </div>
       </div>
+      <!-- end sh. list -->
     </div>
-    <!-- end sh. list -->
+    <div v-else>
+      nie ma takiego komiksu
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "ComicDetails",
-  metaInfo: {
-    title: 'Komiks',
+  data() {
+    return {
+      readMoreActive: false,
+      activeItem: 'chapters',
+      title: 'dupa'
+    }
   },
+  metaInfo () {
+    let comic = this.comic;
+
+    if (comic)
+      return {
+        title: comic.name
+      }
+  },
+  computed: {
+    isLoading() {
+      return this.$store.getters["comic/isLoading"];
+    },
+    hasError() {
+      return this.$store.getters["comic/hasError"];
+    },
+    error() {
+      return this.$store.getters["comic/error"];
+    },
+    hasComic() {
+      return this.$store.getters["comic/hasComis"];
+    },
+    comic() {
+      return this.$store.getters["comic/comic"];
+    },
+    isLoadingChapters() {
+      return this.$store.getters["chapters/isLoadingChapters"];
+    },
+    hasErrorChapters() {
+      return this.$store.getters["chapters/hasErrorChapters"];
+    },
+    errorChapters() {
+      return this.$store.getters["chapters/errorChapters"];
+    },
+    hasChapters() {
+      return this.$store.getters["chapters/hasChapters"];
+    },
+    chapters() {
+      return this.$store.getters["chapters/chapters"];
+    },
+    url() {
+      return location.origin
+    }
+  },
+  created() {
+    this.$store.dispatch("comic/find", this.$route.params.id);
+    this.$store.dispatch("chapters/findByChapter", this.$route.params.id);
+  },
+  methods: {
+    toggleReadMore() {
+      this.readMoreActive = !this.readMoreActive;
+    },
+    isActive (tabPanel) {
+      return this.activeItem === tabPanel;
+    },
+    setActive (tabPanel)
+    {
+      this.activeItem = tabPanel;
+    }
+  }
 }
 </script>
 
